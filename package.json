@@ -1,5 +1,5 @@
 {
-  "name": "notify-watcher-telegram-bot",
+  "name": "@notify-watcher/telegram-bot",
   "version": "0.0.1",
   "description": "Manage subscriptions and receive notifications from Notify Watcher via Telegram",
   "main": "index.js",
@@ -20,6 +20,6 @@
       "email": "franciscosandoval15@gmail.com"
     }
   ],
-  "license": "MIT",
+  "license": "GNU AGPL v3.0",
   "private": false
 }
