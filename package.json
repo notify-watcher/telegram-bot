@@ -20,7 +20,7 @@
       "email": "franciscosandoval15@gmail.com"
     }
   ],
-  "license": "GNU AGPL v3.0",
+  "license": "AGPL-3.0-or-later",
   "private": false,
   "scripts": {
     "lint": "eslint .",
