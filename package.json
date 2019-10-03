@@ -1,0 +1,25 @@
+{
+  "name": "@notify-watcher/telegram-bot",
+  "version": "0.0.1",
+  "description": "Manage subscriptions and receive notifications from Notify Watcher via Telegram",
+  "main": "index.js",
+  "repository": "git@github.com:notify-watcher/telegram-bot.git",
+  "author": {
+    "name": "Sebastián Salata",
+    "email": "sa.salatart@gmail.com",
+    "url": "https://salatart.com"
+  },
+  "contributors": [
+    {
+      "name": "Nicolás Gebauer",
+      "email": "negebauerm@gmail.com",
+      "url": "https://negebauer.com"
+    },
+    {
+      "name": "Francisco Sandoval",
+      "email": "franciscosandoval15@gmail.com"
+    }
+  ],
+  "license": "GNU AGPL v3.0",
+  "private": false
+}
