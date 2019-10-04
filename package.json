@@ -23,6 +23,7 @@
   "license": "GNU AGPL v3.0",
   "private": false,
   "scripts": {
+    "dev": "nodemon .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
@@ -35,6 +36,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.0.8",
     "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1"
   },
@@ -42,5 +44,9 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "dependencies": {
+    "date-fns": "^2.4.1",
+    "telegraf": "^3.32.0"
   }
 }
