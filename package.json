@@ -25,7 +25,8 @@
   "scripts": {
     "dev": "nodemon .",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "test": "echo No tests"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
