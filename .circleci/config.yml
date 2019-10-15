@@ -1,0 +1,60 @@
+node-cache-key: &node-cache-key node-v1-{{ checksum "package.json" }}
+node-docker-image: &node-docker-image circleci/node:12.11
+
+version: 2.1
+
+executors:
+  node_executor:
+    docker:
+      - image: *node-docker-image
+
+commands:
+  node_bootstrap:
+    description: Checkout code and restore node cache
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - *node-cache-key
+            - node-v1-
+
+jobs:
+  bootstrap:
+    description: Install node modules
+    executor: node_executor
+    steps:
+      - node_bootstrap
+      - run:
+          name: Login to github package registry
+          command: . .circleci/login_github_package_registry.sh
+      - run: yarn install
+      - save_cache:
+          key: *node-cache-key
+          paths:
+            - node_modules
+
+  lint:
+    description: Run the linter
+    executor: node_executor
+    steps:
+      - node_bootstrap
+      - run: yarn lint
+
+  test:
+    description: Run tests
+    executor: node_executor
+    steps:
+      - node_bootstrap
+      - run: yarn test
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - bootstrap
+      - lint:
+          requires:
+            - bootstrap
+      - test:
+          requires:
+            - bootstrap
