@@ -48,7 +48,10 @@
   },
   "dependencies": {
     "date-fns": "^2.4.1",
+    "i18next": "^17.2.0",
     "keymirror": "^0.1.1",
-    "telegraf": "^3.32.0"
+    "telegraf": "^3.32.0",
+    "telegraf-session-redis": "^5.1.0",
+    "validator": "^11.1.0"
   }
 }

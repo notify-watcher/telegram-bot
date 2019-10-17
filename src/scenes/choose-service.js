@@ -16,7 +16,7 @@ scene.enter(async ctx => {
     ])
     .concat([[{ text: 'Cancel', callback_data: cancel }]]);
 
-  ctx.reply('Please select the watcher you would like to subscribe to', {
+  ctx.reply(ctx.t('chooseService.chooseOne'), {
     reply_markup: {
       inline_keyboard: inlineKeyboard,
       one_time_keyboard: true,
@@ -36,10 +36,6 @@ scene.on('callback_query', ctx => {
   }
 });
 
-scene.on('message', ctx =>
-  ctx.reply(
-    `Please select a valid option from the services list.\n\nYou can also press the "Cancel" button, or write /cancel to quit this menu.`,
-  ),
-);
+scene.on('message', ctx => ctx.reply(ctx.t('chooseService.chooseAValidOne')));
 
 module.exports = scene;
