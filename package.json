@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "date-fns": "^2.4.1",
+    "keymirror": "^0.1.1",
     "telegraf": "^3.32.0"
   }
 }
