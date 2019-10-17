@@ -14,7 +14,7 @@ module.exports = {
         otpFailed: `${unicodeEmojis.noEntry} Whops! It seems your code is not ok. Please check if the code you submitted is the one we sent to {{email}}`,
       },
     },
-    chooseValidService: {
+    chooseService: {
       chooseOne: 'Please select the watcher you would like to subscribe to.',
       chooseAValidOne: `Please select a valid option from the services list.\n\nYou can also press the "Cancel" button, or write /cancel to quit this menu.`,
     },
