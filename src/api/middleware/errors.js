@@ -1,4 +1,4 @@
-const env = require('../../config').env;
+const { env } = require('../../config');
 
 function logError(err) {
   // TODO: config rollbar, or something like that
