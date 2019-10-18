@@ -18,5 +18,8 @@ module.exports = {
       chooseOne: 'Please select the watcher you would like to subscribe to.',
       chooseAValidOne: `Please select a valid option from the services list.\n\nYou can also press the "Cancel" button, or write /cancel to quit this menu.`,
     },
+    errors: {
+      default: 'Server error',
+    },
   },
 };
