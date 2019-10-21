@@ -27,7 +27,8 @@
     "dev:api": "nodemon src/api/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "jest ."
+    "test": "jest --watchAll",
+    "test:ci": "jest"
   },
   "devDependencies": {
     "eslint": "^6.5.1",

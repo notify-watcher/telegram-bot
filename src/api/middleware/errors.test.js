@@ -2,6 +2,8 @@ const createError = require('http-errors');
 const Factory = require('../../tests/factories');
 const errorsMiddleware = require('./errors');
 
+const { factoryNames } = Factory;
+
 describe('errorsMiddleware', () => {
   const dummyRequest = {};
   const customErrorMessage = 'custom error message';
@@ -12,7 +14,7 @@ describe('errorsMiddleware', () => {
   }
 
   describe('when no status code is specified', () => {
-    const ctx = Factory.build('koa-ctx', { request: dummyRequest });
+    const ctx = Factory.build(factoryNames.koaCtx, { request: dummyRequest });
     const error = new Error(customErrorMessage);
     const next = () => {
       throw error;
@@ -29,7 +31,7 @@ describe('errorsMiddleware', () => {
 
   describe('when a status code of 500 is specified', () => {
     const status = 500;
-    const ctx = Factory.build('koa-ctx', { request: dummyRequest });
+    const ctx = Factory.build(factoryNames.koaCtx, { request: dummyRequest });
     const error = new createError[status](customErrorMessage);
     const next = () => {
       throw error;
@@ -46,7 +48,7 @@ describe('errorsMiddleware', () => {
 
   describe('when a status code different from 500 is specified', () => {
     const status = 400;
-    const ctx = Factory.build('koa-ctx');
+    const ctx = Factory.build(factoryNames.koaCtx);
     const next = () => {
       throw new createError[status](customErrorMessage);
     };
