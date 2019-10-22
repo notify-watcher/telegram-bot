@@ -1,4 +1,13 @@
-const { NODE_ENV = 'development' } = process.env;
+const {
+  NODE_ENV = 'development',
+  NOTIFY_WATCHER_TOKEN,
+  PORT,
+  REDIS_DB,
+  REDIS_HOST,
+  REDIS_PASSWORD,
+  REDIS_PORT,
+  TELEGRAM_BOT_TOKEN,
+} = process.env;
 
 const isDev = NODE_ENV === 'development';
 const isProd = NODE_ENV === 'production';
@@ -6,18 +15,23 @@ const isTest = NODE_ENV === 'test';
 
 module.exports = {
   api: {
-    port: process.env.PORT || 3000,
+    port: PORT || 3000,
     authToken: {
       headerName: 'x-notify-watcher-token',
-      headerValue: process.env.NOTIFY_WATCHER_TOKEN || 'secret',
+      headerValue: NOTIFY_WATCHER_TOKEN || 'secret',
     },
   },
   env: { isDev, isProd, isTest },
-  token: process.env.TELEGRAM_BOT_TOKEN,
-  session: {
-    store: {
-      host: process.env.TELEGRAM_SESSION_HOST || '127.0.0.1',
-      port: process.env.TELEGRAM_SESSION_PORT || 6379,
+  jobs: {
+    concurrencies: {
+      messages: 5,
     },
   },
+  redis: {
+    host: REDIS_HOST || 'localhost',
+    port: REDIS_PORT || 6379,
+    db: REDIS_DB || 0,
+    password: REDIS_PASSWORD,
+  },
+  token: TELEGRAM_BOT_TOKEN,
 };

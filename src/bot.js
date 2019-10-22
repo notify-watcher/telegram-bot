@@ -8,7 +8,7 @@ const { loggerMiddleware, scenesMiddleware } = require('./middleware');
 
 const { sceneNames } = constants;
 
-const session = new RedisSession(config.session);
+const session = new RedisSession(config.redis);
 
 const bot = new Telegraf(config.token);
 bot.context = { apiCalls, t: i18n.t.bind(i18n) };

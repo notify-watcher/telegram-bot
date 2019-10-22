@@ -6,8 +6,10 @@
   ],
   "plugins": ["prettier", "jest"],
   "rules": {
-    "prettier/prettier": "error",
-    "no-underscore-dangle": "off"
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.js", "src/tests/**/*.js"] }
+    ]
   },
   "env": {
     "node": true,

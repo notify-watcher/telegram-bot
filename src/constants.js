@@ -5,6 +5,10 @@ const sceneNames = keymirror({
   chooseService: null,
 });
 
+const queueNames = keymirror({
+  messages: null,
+});
+
 const unicodeEmojis = {
   checkMark: '\u{2705}',
   envelope: '\u{2709}',
@@ -13,7 +17,8 @@ const unicodeEmojis = {
 };
 
 module.exports = {
-  sceneNames,
   cancel: 'CANCEL',
+  queueNames,
+  sceneNames,
   unicodeEmojis,
 };
