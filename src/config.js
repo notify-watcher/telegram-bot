@@ -1,6 +1,7 @@
 const {
   NODE_ENV = 'development',
-  NOTIFY_WATCHER_TOKEN = 'secret',
+  NOTIFY_WATCHER_SERVER_TOKEN = 'server-token',
+  NOTIFY_WATCHER_TELEGRAM_TOKEN = 'telegram-token',
   PORT = 3000,
   REDIS_DB = 0,
   REDIS_HOST = 'localhost',
@@ -16,9 +17,13 @@ const isTest = NODE_ENV === 'test';
 module.exports = {
   api: {
     port: PORT,
-    authToken: {
-      headerName: 'x-notify-watcher-token',
-      headerValue: NOTIFY_WATCHER_TOKEN,
+    serverToken: {
+      headerName: 'x-notify-watcher-server-token',
+      headerValue: NOTIFY_WATCHER_SERVER_TOKEN,
+    },
+    telegramToken: {
+      headerName: 'x-notify-watcher-telegram-token',
+      headerValue: NOTIFY_WATCHER_TELEGRAM_TOKEN,
     },
   },
   env: { isDev, isProd, isTest },

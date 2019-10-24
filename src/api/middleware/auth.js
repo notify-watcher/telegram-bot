@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const config = require('../../config');
 
-const { headerName, headerValue } = config.api.authToken;
+const { headerName, headerValue } = config.api.serverToken;
 
 module.exports = function authMiddleware(ctx, next) {
   const token = ctx.headers[headerName];
