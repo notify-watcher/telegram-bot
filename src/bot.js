@@ -27,4 +27,6 @@ bot.command('list', ctx => {
   ctx.scene.enter(sceneNames.chooseService);
 });
 
+bot.command('chatId', ctx => ctx.reply(ctx.update.message.chat.id));
+
 module.exports = bot;
