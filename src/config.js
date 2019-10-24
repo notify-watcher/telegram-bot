@@ -1,7 +1,7 @@
 const {
   NODE_ENV = 'development',
   NOTIFY_WATCHER_TOKEN = 'secret',
-  PORT = 3000,
+  PORT = 3003,
   REDIS_DB = 0,
   REDIS_HOST = 'localhost',
   REDIS_PASSWORD,
