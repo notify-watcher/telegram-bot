@@ -2,7 +2,7 @@ const {
   NODE_ENV = 'development',
   NOTIFY_WATCHER_SERVER_TOKEN = 'server-token',
   NOTIFY_WATCHER_TELEGRAM_TOKEN = 'telegram-token',
-  PORT = 3000,
+  PORT = 3003,
   REDIS_DB = 0,
   REDIS_HOST = 'localhost',
   REDIS_PASSWORD,
