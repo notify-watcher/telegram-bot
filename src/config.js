@@ -1,6 +1,7 @@
 const {
   NODE_ENV = 'development',
   NOTIFY_WATCHER_SERVER_TOKEN = 'server-token',
+  NOTIFY_WATCHER_SERVER_URL = 'https://localhost:3000',
   NOTIFY_WATCHER_TELEGRAM_TOKEN = 'telegram-token',
   PORT = 3003,
   REDIS_DB = 0,
@@ -17,11 +18,12 @@ const isTest = NODE_ENV === 'test';
 module.exports = {
   api: {
     port: PORT,
-    serverToken: {
+    server: {
       headerName: 'x-notify-watcher-server-token',
       headerValue: NOTIFY_WATCHER_SERVER_TOKEN,
+      url: NOTIFY_WATCHER_SERVER_URL,
     },
-    telegramToken: {
+    telegram: {
       headerName: 'x-notify-watcher-telegram-token',
       headerValue: NOTIFY_WATCHER_TELEGRAM_TOKEN,
     },

@@ -2,7 +2,10 @@ const config = require('./config');
 
 // TODO: Use this header when calling the server api
 // eslint-disable-next-line no-unused-vars
-const { headerName, headerValue } = config.api.telegramToken;
+const { headerName, headerValue } = config.api.telegram;
+// TODO: And to this url
+// eslint-disable-next-line no-unused-vars
+const { url } = config.api.server;
 
 function getServices() {
   return Promise.resolve([
