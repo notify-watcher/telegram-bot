@@ -23,8 +23,7 @@
   "license": "AGPL-3.0-or-later",
   "private": false,
   "scripts": {
-    "dev": "nodemon .",
-    "dev:api": "nodemon src/api/index.js",
+    "dev": "nodemon src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest --watchAll",

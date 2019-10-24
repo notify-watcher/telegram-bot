@@ -1,7 +1,11 @@
 const bot = require('../../bot');
 
 module.exports = function messagesProcessor({
-  data: { chatId, notification },
+  data: {
+    chatId,
+    notification: { message },
+  },
 }) {
-  return bot.telegram.sendMessage(chatId, notification);
+  // TODO: support sending notification.type and notification.metadata
+  return bot.telegram.sendMessage(chatId, message);
 };

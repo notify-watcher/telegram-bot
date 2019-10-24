@@ -1,11 +1,11 @@
 const {
   NODE_ENV = 'development',
-  NOTIFY_WATCHER_TOKEN,
-  PORT,
-  REDIS_DB,
-  REDIS_HOST,
+  NOTIFY_WATCHER_TOKEN = 'secret',
+  PORT = 3000,
+  REDIS_DB = 0,
+  REDIS_HOST = 'localhost',
   REDIS_PASSWORD,
-  REDIS_PORT,
+  REDIS_PORT = 6379,
   TELEGRAM_BOT_TOKEN,
 } = process.env;
 
@@ -15,10 +15,10 @@ const isTest = NODE_ENV === 'test';
 
 module.exports = {
   api: {
-    port: PORT || 3000,
+    port: PORT,
     authToken: {
       headerName: 'x-notify-watcher-token',
-      headerValue: NOTIFY_WATCHER_TOKEN || 'secret',
+      headerValue: NOTIFY_WATCHER_TOKEN,
     },
   },
   env: { isDev, isProd, isTest },
@@ -28,9 +28,9 @@ module.exports = {
     },
   },
   redis: {
-    host: REDIS_HOST || 'localhost',
-    port: REDIS_PORT || 6379,
-    db: REDIS_DB || 0,
+    host: REDIS_HOST,
+    port: REDIS_PORT,
+    db: REDIS_DB,
     password: REDIS_PASSWORD,
   },
   token: TELEGRAM_BOT_TOKEN,

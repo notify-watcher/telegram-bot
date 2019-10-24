@@ -7,10 +7,29 @@ const authTokenConfig = config.api.authToken;
 describe('POST /notifications', () => {
   const URL = '/notifications';
 
-  const validBody = {
-    telegramChatId1: ['notification1', 'notification2'],
-    telegramChatId2: ['notification3'],
-  };
+  const validBody = [
+    {
+      chatId: 'telegramChatId1',
+      notifications: [
+        {
+          type: 'type-1',
+          message: 'message-1',
+          metadata: { url: 'google.com' },
+        },
+        { type: 'type-2', message: 'message-2' },
+      ],
+    },
+    {
+      chatId: 'telegramChatId2',
+      notifications: [
+        {
+          type: 'type-3',
+          message: 'message-3',
+          metadata: { url: 'google.com' },
+        },
+      ],
+    },
+  ];
 
   describe('when the request is not authenticated', () => {
     it('returns a 401 status', () => {
@@ -42,15 +61,23 @@ describe('POST /notifications', () => {
       expect(messagesQueueAddSpy).toHaveBeenCalledTimes(3);
       expect(messagesQueueAddSpy).toHaveBeenNthCalledWith(1, {
         chatId: 'telegramChatId1',
-        notification: 'notification1',
+        notification: {
+          type: 'type-1',
+          message: 'message-1',
+          metadata: { url: 'google.com' },
+        },
       });
       expect(messagesQueueAddSpy).toHaveBeenNthCalledWith(2, {
         chatId: 'telegramChatId1',
-        notification: 'notification2',
+        notification: { type: 'type-2', message: 'message-2' },
       });
       expect(messagesQueueAddSpy).toHaveBeenNthCalledWith(3, {
         chatId: 'telegramChatId2',
-        notification: 'notification3',
+        notification: {
+          type: 'type-3',
+          message: 'message-3',
+          metadata: { url: 'google.com' },
+        },
       });
     });
   });
