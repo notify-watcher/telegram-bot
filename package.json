@@ -1,6 +1,6 @@
 {
   "name": "@notify-watcher/telegram-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Manage subscriptions and receive notifications from Notify Watcher via Telegram",
   "main": "index.js",
   "repository": "https://github.com/notify-watcher/telegram-bot.git",
@@ -26,7 +26,7 @@
     "dev": "nodemon src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prerelease": "/scripts/prerelease.sh",
+    "prerelease": "scripts/prerelease.sh",
     "release": "standard-version",
     "postrelease": "git push --follow-tags && gh-release",
     "test": "jest --watchAll",
