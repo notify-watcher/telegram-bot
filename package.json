@@ -28,7 +28,7 @@
     "lint:fix": "eslint --fix .",
     "prerelease": "scripts/prerelease.sh",
     "release": "standard-version",
-    "postrelease": "git push --follow-tags && gh-release",
+    "postrelease": "git push --follow-tags && gh-release -y",
     "test": "jest --watchAll",
     "test:ci": "jest"
   },
