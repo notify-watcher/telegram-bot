@@ -32,6 +32,7 @@
     "postrelease": "git push --follow-tags && gh-release -y",
     "prerelease": "scripts/prerelease.sh",
     "release": "standard-version",
+    "start": "node src/index.js",
     "test:ci": "jest",
     "test": "jest --watchAll"
   },
