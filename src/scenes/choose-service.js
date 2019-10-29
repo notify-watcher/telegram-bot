@@ -5,7 +5,7 @@ const { sceneNames, cancel } = constants;
 
 const scene = new Scene(sceneNames.chooseService);
 
-scene.enter(async ctx => {
+async function handleEnter(ctx) {
   const services = await ctx.apiCalls.getServices();
   const inlineKeyboard = services
     .map(({ id, name }) => [
@@ -22,7 +22,10 @@ scene.enter(async ctx => {
       one_time_keyboard: true,
     },
   });
-});
+}
+
+scene.enter(handleEnter);
+scene.command('start', handleEnter);
 
 scene.command('cancel', ctx => ctx.scene.leave());
 
