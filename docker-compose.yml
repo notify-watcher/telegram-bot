@@ -1,0 +1,22 @@
+# For running locally
+
+version: '3'
+services:
+  telegram-bot:
+    image: docker.pkg.github.com/notify-watcher/telegram-bot/telegram-bot
+    environment:
+      - NODE_ENV=development
+      - PORT=80
+      - REDIS_HOST=redis
+      - TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
+    depends_on:
+      - redis
+    ports:
+      - '3004:80'
+
+  redis:
+    image: redis:5.0.3
+    expose:
+      - 6379
+    volumes:
+      - ./tmp/redis/data:/data
