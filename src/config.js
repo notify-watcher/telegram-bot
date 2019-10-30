@@ -1,4 +1,5 @@
 const {
+  SERVER_API_URL = 'localhost:3000',
   NODE_ENV = 'development',
   NOTIFY_WATCHER_TOKEN = 'secret',
   PORT = 3003,
@@ -14,6 +15,9 @@ const isProd = NODE_ENV === 'production';
 const isTest = NODE_ENV === 'test';
 
 module.exports = {
+  server: {
+    url: SERVER_API_URL,
+  },
   api: {
     port: PORT,
     authToken: {

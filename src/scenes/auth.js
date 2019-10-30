@@ -15,7 +15,7 @@ scene.command('start', handleEnter);
 
 scene.on('message', async ctx => {
   const { apiCalls, session, t, update } = ctx;
-  const { text } = update.message;
+  const { chat, text } = update.message;
 
   if (['/start', '/help'].includes(text)) return;
 
@@ -31,7 +31,7 @@ scene.on('message', async ctx => {
       });
   } else if (session.email) {
     await apiCalls
-      .verifyOTP(text)
+      .verifyToken(text, session.email, chat.id)
       .then(() => {
         ctx.reply(t('auth.otpVerified'));
         ctx.scene.enter(sceneNames.chooseService);
