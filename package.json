@@ -24,13 +24,17 @@
   ],
   "scripts": {
     "dev": "nodemon src/index.js",
-    "lint": "eslint .",
+    "docker:build": "scripts/docker_build.sh",
+    "docker:push": "npm run docker:build && scripts/docker_push.sh",
+    "docker:run": "npm run docker:build && docker-compose up",
     "lint:fix": "eslint --fix .",
+    "lint": "eslint .",
+    "postrelease": "git push --follow-tags && gh-release -y",
     "prerelease": "scripts/prerelease.sh",
     "release": "standard-version",
-    "postrelease": "git push --follow-tags && gh-release -y",
-    "test": "jest --watchAll",
-    "test:ci": "jest"
+    "start": "node src/index.js",
+    "test:ci": "jest",
+    "test": "jest --watchAll"
   },
   "husky": {
     "hooks": {
