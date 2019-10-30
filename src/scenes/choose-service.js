@@ -6,12 +6,12 @@ const { sceneNames, cancel } = constants;
 const scene = new Scene(sceneNames.chooseService);
 
 async function handleEnter(ctx) {
-  const services = await ctx.apiCalls.getServices();
-  const inlineKeyboard = services
-    .map(({ id, name }) => [
+  const { data: watchersList } = await ctx.apiCalls.listWatchers();
+  const inlineKeyboard = watchersList
+    .map(({ displayName, name }) => [
       {
-        text: name,
-        callback_data: id,
+        text: displayName,
+        callback_data: name,
       },
     ])
     .concat([[{ text: 'Cancel', callback_data: cancel }]]);
