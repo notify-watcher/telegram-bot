@@ -6,9 +6,12 @@ const { sceneNames } = constants;
 
 const scene = new Scene(sceneNames.auth);
 
-scene.enter(ctx => {
+function handleEnter(ctx) {
   ctx.reply(ctx.t('auth.welcome'));
-});
+}
+
+scene.enter(handleEnter);
+scene.command('start', handleEnter);
 
 scene.on('message', async ctx => {
   const { apiCalls, session, t, update } = ctx;
