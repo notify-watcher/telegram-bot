@@ -1,4 +1,4 @@
-node-cache-key: &node-cache-key node-v1-{{ checksum "package.json" }}
+node-cache-key: &node-cache-key node-v2-{{ checksum "package.json" }}
 node-docker-image: &node-docker-image circleci/node:12.11
 
 version: 2.1
@@ -16,7 +16,7 @@ commands:
       - restore_cache:
           keys:
             - *node-cache-key
-            - node-v1-
+            - node-v2-
   login_github_package_registry:
     description: Adds token for accessing github package registry
     steps:
@@ -31,7 +31,7 @@ jobs:
     steps:
       - node_bootstrap
       - login_github_package_registry
-      - run: yarn install
+      - run: npm install
       - save_cache:
           key: *node-cache-key
           paths:
@@ -42,14 +42,14 @@ jobs:
     executor: node_executor
     steps:
       - node_bootstrap
-      - run: yarn lint
+      - run: npm runt lint
 
   test:
     description: Run tests
     executor: node_executor
     steps:
       - node_bootstrap
-      - run: yarn test:ci
+      - run: npm runt test:ci
 
   build_push:
     description: Build docker image and push it
