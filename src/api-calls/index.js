@@ -1,22 +1,5 @@
 const axios = require('./axios');
 
-function getServices() {
-  return Promise.resolve([
-    {
-      id: 'github-id',
-      name: 'GitHub',
-    },
-    {
-      id: 'gtd-id',
-      name: 'GTD',
-    },
-    {
-      id: 'vtr-id',
-      name: 'VTR',
-    },
-  ]);
-}
-
 function registerEmail(email) {
   return axios.post('/users/send-token', { email });
 }
@@ -29,8 +12,12 @@ function verifyToken(token, email, chatId) {
   });
 }
 
+function listWatchers() {
+  return axios.get('/watchers');
+}
+
 module.exports = {
-  getServices,
+  listWatchers,
   registerEmail,
   verifyToken,
 };
