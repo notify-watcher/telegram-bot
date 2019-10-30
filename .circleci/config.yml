@@ -42,14 +42,14 @@ jobs:
     executor: node_executor
     steps:
       - node_bootstrap
-      - run: npm runt lint
+      - run: npm run lint
 
   test:
     description: Run tests
     executor: node_executor
     steps:
       - node_bootstrap
-      - run: npm runt test:ci
+      - run: npm run test:ci
 
   build_push:
     description: Build docker image and push it
