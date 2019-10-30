@@ -1,3 +1,5 @@
+const axios = require('./axios');
+
 function getServices() {
   return Promise.resolve([
     {
@@ -16,15 +18,19 @@ function getServices() {
 }
 
 function registerEmail(email) {
-  return Math.random() <= 0.75 ? Promise.resolve(email) : Promise.reject(email);
+  return axios.post('/users/send-token', { email });
 }
 
-function verifyOTP(otp) {
-  return Math.random() <= 0.75 ? Promise.resolve(otp) : Promise.reject(otp);
+function verifyToken(token, email, chatId) {
+  return axios.post('/clients/register', {
+    token,
+    email,
+    clientData: { kind: 'telegram', chatId },
+  });
 }
 
 module.exports = {
   getServices,
   registerEmail,
-  verifyOTP,
+  verifyToken,
 };
