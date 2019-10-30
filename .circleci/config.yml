@@ -61,8 +61,7 @@ jobs:
           version: 18.09.3
       - run: npm run docker:build
       - run: echo "$DOCKER_TOKEN" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
-      - run: docker image ls
-      # - run: npm run docker:push
+      - run: npm run docker:push
 
 workflows:
   version: 2
@@ -83,4 +82,3 @@ workflows:
             branches:
               only:
                 - master
-                - i26-upload-docker-image-to-gpr
