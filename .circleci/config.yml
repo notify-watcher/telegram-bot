@@ -17,6 +17,12 @@ commands:
           keys:
             - *node-cache-key
             - node-v1-
+  login_github_package_registry:
+    description: Adds token for accessing github package registry
+    steps:
+      - run:
+          name: Login to github package registry
+          command: . .circleci/login_github_package_registry.sh
 
 jobs:
   bootstrap:
@@ -24,9 +30,7 @@ jobs:
     executor: node_executor
     steps:
       - node_bootstrap
-      - run:
-          name: Login to github package registry
-          command: . .circleci/login_github_package_registry.sh
+      - login_github_package_registry
       - run: yarn install
       - save_cache:
           key: *node-cache-key
@@ -47,6 +51,19 @@ jobs:
       - node_bootstrap
       - run: yarn test:ci
 
+  build_push:
+    description: Build docker image and push it
+    executor: node_executor
+    steps:
+      - checkout
+      - login_github_package_registry
+      - setup_remote_docker:
+          version: 18.09.3
+      - run: npm run docker:build
+      - run: echo "$DOCKER_TOKEN" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
+      - run: docker image ls
+      # - run: npm run docker:push
+
 workflows:
   version: 2
   commit:
@@ -58,3 +75,12 @@ workflows:
       - test:
           requires:
             - bootstrap
+      - build_push:
+          requires:
+            - lint
+            - test
+          filters:
+            branches:
+              only:
+                - master
+                - i26-upload-docker-image-to-gpr
