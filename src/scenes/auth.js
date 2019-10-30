@@ -33,11 +33,12 @@ scene.on('message', async ctx => {
     await apiCalls
       .verifyToken(text, session.email, chat.id)
       .then(() => {
-        ctx.reply(t('auth.otpVerified'));
+        ctx.session.loggedIn = true;
+        ctx.reply(t('auth.tokenVerified'));
         ctx.scene.enter(sceneNames.chooseService);
       })
       .catch(() => {
-        ctx.reply(t('auth.errors.otpFailed', { email: session.email }));
+        ctx.reply(t('auth.errors.tokenFailed', { email: session.email }));
       });
   } else {
     ctx.reply(t('auth.writeAnEmail'));

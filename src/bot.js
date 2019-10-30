@@ -18,7 +18,11 @@ bot.use(session);
 bot.use(scenesMiddleware);
 
 bot.start(ctx => {
-  ctx.scene.enter(sceneNames.auth);
+  if (ctx.session.loggedIn) {
+    ctx.reply(ctx.t('welcomeBack'));
+  } else {
+    ctx.scene.enter(sceneNames.auth);
+  }
 });
 
 bot.help(ctx => ctx.reply('Help'));
