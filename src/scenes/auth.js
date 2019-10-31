@@ -35,7 +35,7 @@ scene.on('message', async ctx => {
       .then(() => {
         ctx.session.loggedIn = true;
         ctx.reply(t('auth.tokenVerified'));
-        ctx.scene.enter(sceneNames.chooseService);
+        ctx.scene.enter(sceneNames.chooseNotifications);
       })
       .catch(() => {
         ctx.reply(t('auth.errors.tokenFailed', { email: session.email }));

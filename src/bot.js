@@ -28,7 +28,7 @@ bot.start(ctx => {
 bot.help(ctx => ctx.reply('Help'));
 
 bot.command('list', ctx => {
-  ctx.scene.enter(sceneNames.chooseService);
+  ctx.scene.enter(sceneNames.chooseNotifications);
 });
 
 bot.command('chatId', ctx => ctx.reply(ctx.update.message.chat.id));
