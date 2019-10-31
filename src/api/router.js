@@ -4,9 +4,9 @@ const router = new Router();
 
 router.post('/notifications', ctx => {
   const { body } = ctx.request;
-  body.forEach(({ chatId, notifications }) => {
+  body.forEach(({ chatId, notifications, watcherName }) => {
     notifications.forEach(notification =>
-      ctx.queues.messagesQueue.add({ chatId, notification }),
+      ctx.queues.messagesQueue.add({ chatId, notification, watcherName }),
     );
   });
   ctx.status = 204;
