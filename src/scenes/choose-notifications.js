@@ -93,7 +93,9 @@ scene.on('callback_query', async ctx => {
     ctx.session.me = me;
     ctx.session.currentWatcher = selectedOption;
     ctx.session.notificationTypes = watcher.notificationTypes;
-    ctx.session.subscriptionsCache = me.subscriptions.notificationTypes;
+    ctx.session.subscriptionsCache = (
+      _.find(me.subscriptions, { watcher: selectedOption }) || {}
+    ).notificationTypes;
     return replyWithNotificationsList();
   }
 
