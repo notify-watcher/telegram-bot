@@ -11,5 +11,5 @@
 
 - Clone the repo
 - Run `npm install`
-- Optional: Run `docker-compose up -d` to run a `mongodb` database
+- Optional: Run `docker-compose up -d` to run a `redis` database
 - Run `npm run dev`, this runs `maildev` and the server using `nodemon`
