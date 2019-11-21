@@ -7,8 +7,10 @@ const { BACK, CANCEL, SAVE, sceneNames, unicodeEmojis } = constants;
 const scene = new Scene(sceneNames.chooseNotifications);
 
 function resetCache(ctx) {
-  ctx.session.notificationTypes = [];
-  ctx.session.subscriptionsCache = [];
+  ctx.session.currentWatcherCache = {
+    notificationTypes: [],
+    subscriptionsCache: [],
+  };
 }
 
 function buildWatchersListMarkup(watchersList) {
@@ -60,15 +62,22 @@ scene.on('callback_query', async ctx => {
     return handleCancel(ctx);
   }
 
+  const deletePrevKeyboard = () => {
+    const previousKeyboardId = ctx.update.callback_query.message.message_id;
+    ctx.deleteMessage(previousKeyboardId);
+  };
+
   const goBack = () => {
     resetCache(ctx);
-    return handleListWatchers(ctx);
+    handleListWatchers(ctx);
+    deletePrevKeyboard();
   };
 
   if (selectedOption === SAVE) {
-    const { currentWatcher, me, subscriptionsCache } = ctx.session;
-    await apiCalls.subscribe(me.email, currentWatcher, subscriptionsCache);
-    return goBack();
+    const { authData } = ctx.session.currentWatcherCache;
+    if (!authData) return goBack();
+
+    return ctx.scene.enter(sceneNames.watcherAuth);
   }
 
   if (selectedOption === BACK) {
@@ -76,42 +85,51 @@ scene.on('callback_query', async ctx => {
   }
 
   const replyWithNotificationsList = () => {
+    const {
+      notificationTypes,
+      subscriptionsCache,
+    } = ctx.session.currentWatcherCache;
     ctx.reply(ctx.t('chooseNotifications.chooseOneNotification'), {
       reply_markup: buildNotificationsKeyboard(
-        ctx.session.notificationTypes,
-        ctx.session.subscriptionsCache,
+        notificationTypes,
+        subscriptionsCache,
       ),
     });
-    const previousKeyboardId = ctx.update.callback_query.message.message_id;
-    ctx.deleteMessage(previousKeyboardId);
+    deletePrevKeyboard();
   };
 
+  const { notificationTypes, subscriptionsCache } =
+    ctx.session.currentWatcherCache || {};
+
   // We selected a watcher
-  if (_.isEmpty(ctx.session.notificationTypes)) {
+  if (_.isEmpty(notificationTypes)) {
     const [{ data: me }, { data: watcher }] = await Promise.all([
       apiCalls.me(ctx.session.email),
       apiCalls.listNotifications(selectedOption),
     ]);
     ctx.session.me = me;
-    ctx.session.currentWatcher = selectedOption;
-    ctx.session.notificationTypes = watcher.notificationTypes;
-    ctx.session.subscriptionsCache = (
-      _.find(me.subscriptions, { watcher: selectedOption }) || {}
-    ).notificationTypes;
+    ctx.session.currentWatcherCache = {
+      authData: watcher.auth,
+      currentWatcher: selectedOption,
+      notificationTypes: watcher.notificationTypes,
+      subscriptionsCache: (
+        _.find(me.subscriptions, { watcher: selectedOption }) || {}
+      ).notificationTypes,
+    };
     return replyWithNotificationsList();
   }
 
-  const subscribed = !!_.find(ctx.session.subscriptionsCache, {
+  const subscribed = !!_.find(subscriptionsCache, {
     notificationType: selectedOption,
   });
   if (subscribed) {
-    ctx.session.subscriptionsCache = ctx.session.subscriptionsCache.filter(
+    ctx.session.currentWatcherCache.subscriptionsCache = subscriptionsCache.filter(
       ({ notificationType }) => notificationType !== selectedOption,
     );
   } else {
     const clientId = _.find(ctx.session.me.clients, { kind: 'telegram' })._id;
-    ctx.session.subscriptionsCache = (
-      ctx.session.subscriptionsCache || []
+    ctx.session.currentWatcherCache.subscriptionsCache = (
+      subscriptionsCache || []
     ).concat([{ notificationType: selectedOption, clientIds: [clientId] }]);
   }
 

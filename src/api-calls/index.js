@@ -23,10 +23,11 @@ function listNotifications(watcherName) {
   return axios.get(`/watchers/${watcherName}`);
 }
 
-function subscribe(email, watcher, notificationTypes) {
+function subscribe(email, watcher, notificationTypes, auth) {
   return axios.post(`/users/${email}/subscriptions`, {
     watcher,
     notificationTypes,
+    auth,
   });
 }
 

@@ -3,6 +3,7 @@ const keymirror = require('keymirror');
 const sceneNames = keymirror({
   auth: null,
   chooseNotifications: null,
+  watcherAuth: null,
 });
 
 const queueNames = keymirror({
