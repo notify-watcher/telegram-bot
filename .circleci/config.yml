@@ -60,7 +60,7 @@ jobs:
       - setup_remote_docker:
           version: 18.09.3
       - run: npm run docker:build
-      - run: echo "$DOCKER_TOKEN" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
+      - run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - run: npm run docker:push
 
 workflows:
