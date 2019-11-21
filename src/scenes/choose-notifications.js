@@ -24,11 +24,11 @@ function buildWatchersListMarkup(watchersList) {
 function buildNotificationsKeyboard(notificationTypes, currentSubscriptions) {
   const subscriptionsByType = _.keyBy(currentSubscriptions, 'notificationType');
   const list = Object.values(notificationTypes)
-    .map(({ key, description }) => {
-      const icon = subscriptionsByType[key]
+    .map(({ type, description }) => {
+      const icon = subscriptionsByType[type]
         ? unicodeEmojis.checkMark
         : unicodeEmojis.square;
-      return [{ text: `${icon} ${description}`, callback_data: key }];
+      return [{ text: `${icon} ${description}`, callback_data: type }];
     })
     .concat([[{ text: 'Save', callback_data: SAVE }]])
     .concat([[{ text: 'Back', callback_data: BACK }]]);
