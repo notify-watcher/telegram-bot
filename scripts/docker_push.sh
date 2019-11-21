@@ -1,6 +1,9 @@
 #!/bin/bash
 
-image=$(scripts/docker_image.sh)
-tag=$(scripts/docker_tag.sh)
+push() {
+  for image_tag in $(scripts/docker_tags.sh); do
+    docker push $image_tag
+  done
+}
 
-docker push $image:$tag
+push
