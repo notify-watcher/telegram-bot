@@ -84,4 +84,3 @@ workflows:
             branches:
               only:
                 - master
-                - move-to-docker-hub
