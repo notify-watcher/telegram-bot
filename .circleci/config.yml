@@ -67,7 +67,8 @@ workflows:
   version: 2
   commit:
     jobs:
-      - bootstrap
+      - bootstrap:
+          context: notify-watcher
       - lint:
           requires:
             - bootstrap
@@ -75,6 +76,7 @@ workflows:
           requires:
             - bootstrap
       - build_push:
+          context: notify-watcher
           requires:
             - lint
             - test
@@ -82,3 +84,4 @@ workflows:
             branches:
               only:
                 - master
+                - move-to-docker-hub
