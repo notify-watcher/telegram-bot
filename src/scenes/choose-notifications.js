@@ -82,6 +82,8 @@ scene.on('callback_query', async ctx => {
         ctx.session.subscriptionsCache,
       ),
     });
+    const previousKeyboardId = ctx.update.callback_query.message.message_id;
+    ctx.deleteMessage(previousKeyboardId);
   };
 
   // We selected a watcher
