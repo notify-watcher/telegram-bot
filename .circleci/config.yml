@@ -17,12 +17,12 @@ commands:
           keys:
             - *node-cache-key
             - node-v2-
-  login_github_package_registry:
-    description: Adds token for accessing github package registry
+  npm_login:
+    description: Adds token for accessing github package registry with npm
     steps:
       - run:
-          name: Login to github package registry
-          command: . .circleci/login_github_package_registry.sh
+          name: Login to github package registry with npm
+          command: . .circleci/npm_login.sh
 
 jobs:
   bootstrap:
@@ -30,7 +30,7 @@ jobs:
     executor: node_executor
     steps:
       - node_bootstrap
-      - login_github_package_registry
+      - npm_login
       - run: npm install
       - save_cache:
           key: *node-cache-key
@@ -56,18 +56,19 @@ jobs:
     executor: node_executor
     steps:
       - checkout
-      - login_github_package_registry
+      - npm_login
       - setup_remote_docker:
           version: 18.09.3
       - run: npm run docker:build
-      - run: echo "$DOCKER_TOKEN" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
+      - run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - run: npm run docker:push
 
 workflows:
   version: 2
   commit:
     jobs:
-      - bootstrap
+      - bootstrap:
+          context: notify-watcher
       - lint:
           requires:
             - bootstrap
@@ -75,6 +76,7 @@ workflows:
           requires:
             - bootstrap
       - build_push:
+          context: notify-watcher
           requires:
             - lint
             - test
