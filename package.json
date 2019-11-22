@@ -24,6 +24,8 @@
   ],
   "scripts": {
     "dev": "nodemon src/index.js",
+    "dev:start": "docker-compose up -d",
+    "dev:stop": "docker-compose down",
     "docker:build": "scripts/docker_build.sh",
     "docker:push": "npm run docker:build && scripts/docker_push.sh",
     "docker:run": "npm run docker:build && docker-compose up",

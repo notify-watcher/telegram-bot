@@ -9,6 +9,7 @@ build() {
   DOCKER_BUILDKIT=1 docker build \
   --progress=auto \
   --secret id=npmrc,src=$HOME/.npmrc \
+  --build-arg GIT_DESCRIBE=$(git describe) \
   $image_tags \
   .
 }

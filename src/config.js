@@ -1,5 +1,7 @@
+const { version: VERSION } = require('../package.json');
+
 const {
-  SERVER_API_URL = 'localhost:3000',
+  GIT_DESCRIBE,
   NODE_ENV = 'development',
   NOTIFY_WATCHER_TOKEN = 'secret',
   PORT = 3003,
@@ -7,6 +9,7 @@ const {
   REDIS_HOST = 'localhost',
   REDIS_PASSWORD,
   REDIS_PORT = 6379,
+  SERVER_API_URL = 'localhost:3000',
   TELEGRAM_BOT_TOKEN,
 } = process.env;
 
@@ -15,6 +18,8 @@ const isProd = NODE_ENV === 'production';
 const isTest = NODE_ENV === 'test';
 
 module.exports = {
+  GIT_DESCRIBE,
+  VERSION,
   server: {
     url: SERVER_API_URL,
   },
