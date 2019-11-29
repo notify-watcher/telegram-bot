@@ -18,7 +18,7 @@ RUN chmod +x docker_entrypoint.sh
 COPY package.json .
 COPY package-lock.json .
 
-RUN --mount=type=secret,id=npmrc,dst=/server/.npmrc npm install
+RUN --mount=type=secret,id=npmrc,dst=/telegram-bot/.npmrc npm install
 
 COPY src src
 
