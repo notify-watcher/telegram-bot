@@ -1,0 +1,3 @@
+export TELEGRAM_BOT_TOKEN=telegram_token
+export SERVER_API_URL=localhost:3000
+export GIT_DESCRIBE=$(git describe)
