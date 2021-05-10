@@ -53,7 +53,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.1",
     "koa-router": "^7.4.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "telegraf": "^3.32.0",
     "telegraf-session-redis": "^5.1.0",
     "validator": "^11.1.0"
