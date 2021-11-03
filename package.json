@@ -56,7 +56,7 @@
     "lodash": "^4.17.15",
     "telegraf": "^3.32.0",
     "telegraf-session-redis": "^5.1.0",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
